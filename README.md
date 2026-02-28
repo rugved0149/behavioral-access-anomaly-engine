@@ -1,17 +1,3 @@
-Good.
-We’ll build this README like a proper security-engineering project — not a college toy.
-
-I’ll structure it professionally, clearly, and reviewer-oriented.
-
-This is **Part 1** (Core README).
-Part 2 will include deployment + reviewer demo flow + architecture diagram explanation.
-
----
-
-# 📘 README — Behavioral Access Anomaly Engine
-
----
-
 # 🛡 Behavioral Access Anomaly & Identity Risk Engine
 
 A multi-signal behavioral security engine that detects anomalous access patterns using contextual signal correlation, weighted risk scoring, synergy amplification, and identity-level memory modeling.
