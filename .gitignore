@@ -1,0 +1,6 @@
+access_behavior.db
+__pycache__/
+*.pyc
+venv/
+.env
+logs/

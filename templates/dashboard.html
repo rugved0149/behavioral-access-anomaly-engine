@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Behavioral Security Console</title>
+    <style>
+        body {
+            background-color: #0b1220;
+            color: #e5e7eb;
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #9ca3af;
+        }
+
+        .metrics {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 220px;
+        }
+
+        .metric-title {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .risk-bar-container {
+            margin-top: 10px;
+            background: #1f2937;
+            border-radius: 6px;
+            height: 12px;
+            overflow: hidden;
+        }
+
+        .risk-bar {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.4s ease;
+        }
+
+        .risk-low { background: #16a34a; }
+        .risk-medium { background: #facc15; }
+        .risk-high { background: #dc2626; }
+
+        .event-card {
+            background: #111827;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #1f2937;
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .event-id {
+            font-weight: 600;
+        }
+
+        .risk-score {
+            font-size: 14px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .normal { background: #15803d; }
+        .suspicious { background: #ca8a04; color: black; }
+        .high { background: #b91c1c; }
+
+        .attack-type {
+            font-size: 13px;
+            color: #38bdf8;
+            margin-top: 6px;
+            margin-bottom: 8px;
+        }
+
+        .signal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .signal-table th,
+        .signal-table td {
+            padding: 6px;
+            border-bottom: 1px solid #1f2937;
+            text-align: left;
+        }
+
+        .signal-table th {
+            color: #9ca3af;
+            font-weight: 500;
+        }
+
+        .expand {
+            cursor: pointer;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        .expand:hover {
+            color: #e5e7eb;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Behavioral Access Anomaly Console</h1>
+
+{% set risk_class =
+    'risk-low' if identity_risk_percent < 30
+    else 'risk-medium' if identity_risk_percent < 70
+    else 'risk-high'
+%}
+
+<div class="metrics">
+
+    <div class="metric-card">
+        <div class="metric-title">Total Events</div>
+        <div class="metric-value">{{ total_events }}</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-title">Suspicious</div>
+        <div class="metric-value">{{ suspicious }}</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-title">High Risk</div>
+        <div class="metric-value">{{ high_risk }}</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-title">Identity Risk</div>
+
+        <div class="metric-value">
+            {{ "%.2f"|format(identity_risk) }}
+        </div>
+
+        <div class="risk-bar-container">
+            <div class="risk-bar {{ risk_class }}"
+                data-width="{{ identity_risk_percent }}">
+            </div>
+        </div>
+
+        <div style="font-size:12px; margin-top:5px; color:#9ca3af;">
+            {{ identity_risk_percent }}%
+        </div>
+    </div>
+
+</div>
+
+<h2>Recent Decisions</h2>
+
+{% for event in recent %}
+<div class="event-card">
+
+    <div class="event-header">
+        <div class="event-id">Event #{{ event.event_id }}</div>
+        <div class="risk-score">
+            Risk: <strong>{{ "%.3f"|format(event.risk_score) }}</strong>
+        </div>
+    </div>
+
+    <div>
+        <span class="badge
+            {% if event.verdict == 'NORMAL' %}normal
+            {% elif event.verdict == 'SUSPICIOUS' %}suspicious
+            {% else %}high{% endif %}">
+            {{ event.verdict }}
+        </span>
+    </div>
+
+    <div class="attack-type">
+        Attack Type: {{ event.attack_type }}
+    </div>
+
+    {% if event.explainability %}
+    <details>
+        <summary class="expand">View Signal Breakdown</summary>
+
+        <table class="signal-table">
+            <thead>
+                <tr>
+                    <th>Signal</th>
+                    <th>Raw Risk</th>
+                    <th>Weight</th>
+                    <th>Contribution</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in event.explainability.signals %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ "%.2f"|format(s.raw_risk) }}</td>
+                    <td>{{ "%.2f"|format(s.weight) }}</td>
+                    <td>{{ "%.3f"|format(s.contribution) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="margin-top:10px; font-size:12px; color:#9ca3af;">
+            Synergy Multiplier: {{ event.explainability.synergy_multiplier }}
+        </div>
+
+        <div style="margin-top:5px; font-weight:bold;">
+            Final Score: {{ "%.3f"|format(event.explainability.final_score) }}
+        </div>
+
+    </details>
+    {% endif %}
+
+</div>
+{% endfor %}
+<script>
+    document.querySelectorAll('.risk-bar').forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width + '%';
+    });
+</script>
+
+<script>
+    async function refreshDashboard() {
+        try {
+            const response = await fetch("/api/dashboard");
+            const data = await response.json();
+
+            // Update metrics
+            document.getElementById("totalEvents").innerText = data.total_events;
+            document.getElementById("suspiciousCount").innerText = data.suspicious;
+            document.getElementById("highRiskCount").innerText = data.high_risk;
+
+            // Identity Risk
+            const identityRisk = (data.identity_risk * 100).toFixed(0);
+            document.getElementById("identityPercent").innerText = identityRisk + "%";
+            document.getElementById("identityBar").style.width = identityRisk + "%";
+
+        } catch (error) {
+            console.error("Dashboard refresh failed:", error);
+        }
+    }
+    // Refresh every 5 seconds
+    setInterval(refreshDashboard, 5000);
+</script>
+
+</body>
+</html>
