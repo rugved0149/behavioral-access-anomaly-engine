@@ -1,17 +1,3 @@
-Good.
-We’ll build this README like a proper security-engineering project — not a college toy.
-
-I’ll structure it professionally, clearly, and reviewer-oriented.
-
-This is **Part 1** (Core README).
-Part 2 will include deployment + reviewer demo flow + architecture diagram explanation.
-
----
-
-# 📘 README — Behavioral Access Anomaly Engine
-
----
-
 # 🛡 Behavioral Access Anomaly & Identity Risk Engine
 
 A multi-signal behavioral security engine that detects anomalous access patterns using contextual signal correlation, weighted risk scoring, synergy amplification, and identity-level memory modeling.
@@ -722,14 +708,6 @@ This project demonstrates:
 * Security engineering design
 * API design + UI integration
 * Production deployment awareness
-
----
-
-# 🧠 Resume Summary (Optional Section)
-
-You may use this in CV:
-
-> Designed and implemented a multi-signal behavioral anomaly detection engine with weighted contextual scoring, synergy amplification, identity-level risk memory, explainable signal attribution, and dashboard visualization. Built using Flask, SQLite, and statistical modeling principles. Supports authenticated API ingestion and real-time risk monitoring.
 
 ---
 
