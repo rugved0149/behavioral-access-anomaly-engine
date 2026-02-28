@@ -740,3 +740,27 @@ This project demonstrates how behavioral signals, when correlated and weighted i
 It is intended as a prototype behavioral risk engine and conceptual foundation for adaptive security systems and zero-trust environments.
 
 ---
+
+## 14. Author
+
+Rugved Suryawanshi
+Computer Science (Software) Engineering Student
+Focused on behavioral cybersecurity systems, adaptive risk modeling, and defensive security architecture.
+
+This project reflects applied research in:
+
+* Context-aware anomaly detection
+* Multi-signal behavioral correlation
+* Identity-level risk memory modeling
+* Explainable security scoring systems
+* Zero-trust adaptive risk frameworks
+
+---
+
+## 15. License
+
+This project is licensed under the **MIT License**.
+
+The MIT License permits use, modification, distribution, and private deployment of this software with proper attribution.
+
+See the `LICENSE` file in this repository for full legal text.
