@@ -17,9 +17,8 @@ A burst of requests
 
 A login at an unusual time
 
-However, real attacks are multi-dimensional.
 
-This project was designed to:
+However, real attacks are multi-dimensional hence this project was designed to:
 
 Correlate multiple weak signals
 
@@ -32,6 +31,7 @@ Maintain rolling identity-level risk memory
 Provide explainable AI-style breakdown of risk decisions
 
 Classify behavioral attack patterns
+
 
 🧠 Core Design Philosophy
 
@@ -46,6 +46,7 @@ Synergy amplification
 Identity memory persistence
 
 Explainability-first detection
+
 
 🏗 System Architecture
 Client Request
@@ -69,6 +70,8 @@ Identity Risk Update
 Explainability Storage
       ↓
 Dashboard / API Output
+
+
 🔍 Behavioral Signals Modeled
 
 The system currently models six contextual signals:
@@ -83,9 +86,8 @@ Learns mean and standard deviation during learning phase
 
 Detects unusual time-of-access
 
-Example:
+Example: time_z=6.0
 
-time_z=6.0
 2️⃣ Network Familiarity Signal
 
 Checks if country / ASN has been seen before.
@@ -93,6 +95,7 @@ Checks if country / ASN has been seen before.
 New geographic origin increases risk
 
 Known network contributes 0 risk
+
 
 3️⃣ Device Fingerprint Signal
 
@@ -114,6 +117,7 @@ Language headers
 
 New device → high raw risk
 
+
 4️⃣ Client Type Shift Signal
 
 Detects shift in access mode:
@@ -125,6 +129,7 @@ browser → script
 browser → automation
 
 read → write
+
 
 5️⃣ Burst Detection Signal
 
@@ -142,6 +147,7 @@ API abuse
 
 Brute force bursts
 
+
 6️⃣ Inter-Event Gap Signal
 
 Measures time difference between consecutive events.
@@ -155,6 +161,8 @@ Suspicious automation-like timing
 Example:
 
 rapid_gap=0.06
+
+
 ⚖ Weighted Risk Model
 
 Each signal contributes:
@@ -173,6 +181,7 @@ Gap	0.30
 
 Total risk is aggregated.
 
+
 🔥 Synergy Amplification
 
 If 3 or more signals trigger:
@@ -185,6 +194,8 @@ Example from test run:
 
 "synergy_multiplier": 1.25,
 "final_score": 1.0
+
+
 🎯 Verdict Classification
 
 Risk Score Range → Verdict:
@@ -195,6 +206,7 @@ Score	Verdict
 0.70 – 1.00	HIGH_RISK
 
 Scores are capped at 1.0.
+
 
 🧬 Identity-Level Risk Memory
 
@@ -213,6 +225,7 @@ Decay factor applied over time
 Represents cumulative behavioral drift
 
 This models long-term compromise patterns.
+
 
 🧾 Explainability Engine
 
@@ -242,6 +255,7 @@ Review validation
 
 Model trust
 
+
 📊 Dashboard Features
 
 The web dashboard displays:
@@ -260,6 +274,7 @@ Signal breakdown per event
 
 Auto-refresh every 5 seconds.
 
+
 🔐 Authentication
 
 API endpoint requires HTTP Basic Authentication.
@@ -268,7 +283,7 @@ Credentials (default demo):
 
 Username: admin
 Password: admin123
-🌐 API Documentation
+API Documentation
 POST /event
 Authentication
 
@@ -296,6 +311,8 @@ Response Example
     "rapid_gap=0.06"
   ]
 }
+
+
 🧪 Testing Scenarios
 
 The engine was validated against:
@@ -318,6 +335,7 @@ Identity risk saturation
 
 Explainability JSON verified for correctness.
 
+
 📦 Technology Stack
 
 Python 3.11
@@ -333,6 +351,7 @@ Gunicorn (production)
 SHA-256 fingerprinting
 
 Render deployment
+
 
 🧠 Why This Is Not a Basic Project
 
@@ -362,6 +381,7 @@ API + UI separation
 
 Authentication layer
 
+
 📈 Real-World Use Cases
 
 API abuse detection
@@ -388,15 +408,14 @@ Not optimized for horizontal scaling
 
 These are acceptable trade-offs for academic prototype scope.
 
-🧪 Reviewer Demonstration Guide
 
-This section explains how the system should be evaluated.
+
+🧪 Reviewer Demonstration Guide
 
 🔹 Step 1 — Open Dashboard
 
 Visit:
 
-https://<your-app-name>.onrender.com/
 
 You will see:
 
@@ -413,6 +432,7 @@ Recent Decision Cards
 Signal Breakdown per Event
 
 Initially, metrics may be low or zero.
+
 
 🔹 Step 2 — Generate Normal Behavior
 
@@ -442,6 +462,7 @@ Then NORMAL verdict
 
 Risk score close to 0.0
 
+
 🔹 Step 3 — Simulate Burst Behavior
 
 Send rapid repeated requests with:
@@ -462,6 +483,7 @@ rapid_gap triggered
 Verdict escalates to HIGH_RISK
 
 Identity risk meter increases
+
 
 🔹 Step 4 — Trigger Multi-Signal Synergy
 
@@ -490,6 +512,7 @@ synergy_multiplier = 1.25
 
 final_score capped at 1.0
 
+
 🔹 Step 5 — Observe Explainability
 
 Click “View Signal Breakdown” in dashboard.
@@ -507,6 +530,7 @@ Synergy multiplier
 Final computed score
 
 This demonstrates model transparency.
+
 
 📂 Project Structure
 behavioral_access_anomaly/
@@ -540,38 +564,7 @@ behavioral_access_anomaly/
 │   └── dashboard.html
 │
 └── access_behavior.db
-🚀 Deployment Instructions (Render)
-1️⃣ Ensure requirements.txt exists
 
-Generate:
-
-pip freeze > requirements.txt
-
-Ensure it contains:
-
-Flask
-
-gunicorn
-
-user-agents
-
-any other dependencies
-
-2️⃣ Start Command
-
-Set start command in Render:
-
-gunicorn app:app
-3️⃣ Build Command
-pip install -r requirements.txt
-4️⃣ Optional Production Hardening
-
-Move credentials into environment variables:
-
-AUTH_USERNAME=admin
-AUTH_PASSWORD=admin123
-
-And modify config.py accordingly.
 
 🔐 Security Considerations
 
@@ -597,6 +590,7 @@ Add TLS enforcement
 
 Add IP reputation integration
 
+
 🧬 Attack Classification Logic
 
 The engine classifies attack patterns:
@@ -615,6 +609,7 @@ MULTI_SIGNAL_ANOMALY
 
 Classification is based on dominant triggering signals.
 
+
 📈 Identity Risk Modeling
 
 Identity risk:
@@ -628,6 +623,7 @@ Represents long-term behavioral drift
 Saturates at 1.0 under sustained anomaly
 
 This models persistent compromise scenarios.
+
 
 🔭 Future Improvements
 
@@ -653,7 +649,8 @@ API rate limiting
 
 Alert webhook integration
 
-📊 Research & Engineering Value
+
+📊Research & Engineering Value
 
 This project demonstrates:
 
@@ -672,3 +669,12 @@ Security engineering design
 API design + UI integration
 
 Production deployment awareness
+
+## Author
+
+Rugved Suryawanshi
+Computer Science Engineering Student
+
+## License
+
+This project is licensed under the MIT License – see the LICENSE file for details.
