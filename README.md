@@ -711,14 +711,6 @@ This project demonstrates:
 
 ---
 
-# 🧠 Resume Summary (Optional Section)
-
-You may use this in CV:
-
-> Designed and implemented a multi-signal behavioral anomaly detection engine with weighted contextual scoring, synergy amplification, identity-level risk memory, explainable signal attribution, and dashboard visualization. Built using Flask, SQLite, and statistical modeling principles. Supports authenticated API ingestion and real-time risk monitoring.
-
----
-
 # 🏁 Final Statement
 
 This project demonstrates how behavioral signals, when correlated and weighted intelligently, can provide a far more accurate and explainable risk assessment than isolated security rules.
