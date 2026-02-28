@@ -723,15 +723,6 @@ It is intended as a prototype behavioral risk engine and conceptual foundation f
 
 Rugved Suryawanshi
 Computer Science (Software) Engineering Student
-Focused on behavioral cybersecurity systems, adaptive risk modeling, and defensive security architecture.
-
-This project reflects applied research in:
-
-* Context-aware anomaly detection
-* Multi-signal behavioral correlation
-* Identity-level risk memory modeling
-* Explainable security scoring systems
-* Zero-trust adaptive risk frameworks
 
 ---
 
