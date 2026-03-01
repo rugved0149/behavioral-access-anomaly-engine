@@ -1,3 +1,4 @@
+import os
 from functools import wraps
 from config import Config
 from flask import request
@@ -229,4 +230,5 @@ def ingest_access_event():
 # Application Entry
 # ----------------------------
 if __name__ == "__main__":
-    app.run(debug=True) 
+    port = int(os.environ.get("PORT",5000))
+    app.run(host="0.0.0.0",port=port)
