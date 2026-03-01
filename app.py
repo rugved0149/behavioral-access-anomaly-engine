@@ -16,7 +16,7 @@ from db.init_db import init_db
 # App Configuration
 # ----------------------------
 app = Flask(__name__)
-init_db
+init_db()
 # ----------------------------
 # Logging Configuration
 # ----------------------------
