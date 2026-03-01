@@ -719,14 +719,14 @@ It is intended as a prototype behavioral risk engine and conceptual foundation f
 
 ---
 
-## 14. Author
+## Author
 
 Rugved Suryawanshi
 Computer Science (Software) Engineering Student
 
 ---
 
-## 15. License
+## License
 
 This project is licensed under the **MIT License**.
 
