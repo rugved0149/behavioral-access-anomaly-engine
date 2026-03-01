@@ -10,12 +10,13 @@ from datetime import datetime
 from flask import render_template
 from db.database import get_connection
 from utils.fingerprint import generate_device_fingerprint
+from db.init_db import init_db
 
 # ----------------------------
 # App Configuration
 # ----------------------------
 app = Flask(__name__)
-
+init_db
 # ----------------------------
 # Logging Configuration
 # ----------------------------
