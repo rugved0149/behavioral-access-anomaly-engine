@@ -1,5 +1,5 @@
 from pathlib import Path
-from database import get_connection
+from db.database import get_connection
 
 SCHEMA_PATH = Path(__file__).resolve().parent / "schema.sql"
 
