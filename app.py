@@ -20,11 +20,9 @@ app = Flask(__name__)
 # Logging Configuration
 # ----------------------------
 logging.basicConfig(
-    filename="logs/app.log",
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
-
 logging.info("Application starting...")
 
 def require_basic_auth(f):
