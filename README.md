@@ -376,9 +376,6 @@ Computer Science (Software) Engineering Student
 ---
 
 ## License
-
-This project is licensed under the **MIT License**.
-
-The MIT License permits use, modification, distribution, and private deployment of this software with proper attribution.
-
-See the `LICENSE` file in this repository for full legal text.
+© 2025 Rugved Suryawanshi.  
+This project is licensed under the MIT License.  
+Attribution is required in all copies or substantial portions of the Software.
